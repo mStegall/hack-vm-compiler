@@ -217,6 +217,22 @@ function parseLine(line) {
                         `@${+arg2 + 5}`,
                         'M=D'
                     ].join('\n');
+                case 'static':
+                    return [
+                        '@SP',
+                        'AM=M-1',
+                        'D=M',
+                        `@${+arg2 + 16}`,
+                        'M=D'
+                    ].join('\n');
+                case 'pointer':
+                    return [
+                        '@SP',
+                        'AM=M-1',
+                        'D=M',
+                        `@${+arg2 + 3}`,
+                        'M=D'
+                    ].join('\n');
 
             }
         case 'push':
@@ -282,6 +298,24 @@ function parseLine(line) {
                 case 'temp':
                     return [
                         `@${+arg2 + 5}`,
+                        'D=M',
+                        '@SP',
+                        'M=M+1',
+                        'A=M-1',
+                        'M=D',
+                    ].join('\n');
+                case 'static':
+                    return [
+                        `@${+arg2 + 16}`,
+                        'D=M',
+                        '@SP',
+                        'M=M+1',
+                        'A=M-1',
+                        'M=D',
+                    ].join('\n');
+                case 'pointer':
+                    return [
+                        `@${+arg2 + 3}`,
                         'D=M',
                         '@SP',
                         'M=M+1',
