@@ -323,6 +323,21 @@ function parseLine(line) {
                         'M=D',
                     ].join('\n');
             }
+        case 'label':
+            return `(${arg1})`;
+        case 'goto':
+            return [
+                `@${arg1}`,
+                '0;JMP',
+            ].join('\n');
+        case 'if-goto':
+            return [
+                '@SP',
+                'AM=M-1',
+                'D=M',
+                `@${arg1}`,
+                'D;JNE'
+            ].join('\n');
     }
 }
 
